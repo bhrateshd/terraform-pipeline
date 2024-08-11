@@ -1,10 +1,11 @@
 pipeline {
 
+    agent any
+
     options {
         buildDiscarder(logRotator(numToKeepStr: '5', artifactNumToKeepStr: '5'))
     }
 
-    }
     stages {
         stage('Terraform Version') {
             steps {
@@ -14,7 +15,7 @@ pipeline {
         }
         stage('Terraform format') {
             steps {
-                echo 'Terraform Initialization is In Progress!'
+                echo 'Terraform Formatting is In Progress!'
                 sh 'terraform fmt'
             }
         }		
@@ -26,9 +27,8 @@ pipeline {
         }
         stage('Terraform Plan') {
             steps {
-                echo 'Terraform Initialization is In Progress!'
+                echo 'Terraform Planning is In Progress!'
                 sh 'terraform plan -var-file=terraform.tfvars -out=tfplan.txt'
-
             }
         }
         stage('Approval') {
@@ -52,4 +52,5 @@ pipeline {
                 sh 'terraform apply --auto-approve'
             }
         }
-	}
+    }
+}
