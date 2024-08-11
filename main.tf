@@ -1,15 +1,19 @@
 resource "aws_instance" "myinstance" {
-    ami = "ami-0d473344347276854"
-    count = 1
-    instance_type ="t2.micro"
+  ami           = var.instance_ami
+  count         = var.instance_count
+  instance_type = var.instance_type
 }
 
-resource "aws_instance" "myinstance1" {
-    ami = "ami-0d473344347276854"
-    count = 1
-    instance_type ="t2.micro"
+
+resource "aws_vpc" "myvpc" {
+  cidr_block = "10.0.0.0/16"
 }
 
-resource "aws_vpc" "myvps" {
-    cidr_block ="10.0.0.0/16"
+resource "aws_s3_bucket" "example" {
+  bucket = var.bucket_name
+
+  tags = {
+    Name        = "My bucket"
+    Environment = "Dev"
+  }
 }
