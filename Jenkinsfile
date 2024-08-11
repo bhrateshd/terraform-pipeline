@@ -4,11 +4,6 @@ pipeline {
         buildDiscarder(logRotator(numToKeepStr: '5', artifactNumToKeepStr: '5'))
     }
 
-    agent any
-
-    environment {
-    AWS_ACCESS_KEY_ID     = credentials('terraform-aws-airindia-jenkins')
-    AWS_SECRET_ACCESS_KEY = credentials('terraform-aws-airindia-jenkins')
     }
     stages {
         stage('Terraform Version') {
