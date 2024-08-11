@@ -1,6 +1,10 @@
 pipeline {
 
     agent any
+    environment {
+        AWS_ACCESS_KEY_ID = credentials('WS_ACCESS_KEY_ID')
+        AWS_SECRET_ACCESS_KEY = credentials('AWS_SECRET_ACCESS_KEY')
+    }
 
     options {
         buildDiscarder(logRotator(numToKeepStr: '5', artifactNumToKeepStr: '5'))
